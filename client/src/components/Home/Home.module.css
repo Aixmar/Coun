@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+.contHome {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    height: 800px;
+    background-color: rgb(73, 148, 228);
+    /* background-image: url('C:\Users\aixag\OneDrive\Escritorio\PI-Countries-main NUEVO\client\src\assets\FondoHome.png');
+    filter: blur(9px); */
+  }
+
+  .content {
+    position: relative;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+

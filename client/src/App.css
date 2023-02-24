@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*
+border-box crea la caja para contener todo.
+Si quisiera que la caja fuera mas chica, le pongo margin y padding
+*/
+
+body::-webkit-scrollbar {
+  width: 15px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 15px;
+}
