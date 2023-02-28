@@ -9,12 +9,12 @@ const createActivity = async (idCountry, name, difficulty, duration, season) => 
     season,
   });
   // Busca el Country mediante el body idCountry para colocar la actividad created
-  const pushCountry = await Country.findOne({
+  const searchCountry = await Country.findAll({
     where: { 
         id: idCountry },
   });
   // Mete la actividad creada al Pais
-  await activityCreated.addCountry(pushCountry);
+  await activityCreated.addCountry(searchCountry);
   return activityCreated;
 };
 

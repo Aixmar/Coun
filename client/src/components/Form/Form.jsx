@@ -8,12 +8,7 @@ const Form = () => {
 
 const dispatch = useDispatch();
   const countries = useSelector((state)=> state.countries);
-
-const idCountry = countries.map((count) => count.id)
-
-console.log(idCountry);
-
-  // const idCountry = countries.id;
+const [countryNames, setCountryNames] = useState([]);
 
 //Creo state local de actividades nuevas que entran por input
   const [input, setInput] = useState({
@@ -24,7 +19,7 @@ console.log(idCountry);
     countries:[]
   });
   
-  console.log(input);
+ 
 
   useEffect(()=> {
     dispatch(getCountries());
@@ -38,8 +33,8 @@ console.log(idCountry);
     season:"",
     countries:[]
   });
-  // console.log(errors);
-  // console.log(input);
+  console.log("ESTOS SON LOS ERROOOORES", errors);
+  console.log(input);
     
  
   //fn que se ejecuta cada vez que el usuario escribe en un input
@@ -69,12 +64,19 @@ console.log(idCountry);
     }
   }
 
-  const handleSelect = (idCountry) => {
+  const handleSelect = (event) => {
     setInput({
       ...input,
-      countries:[...input.countries, idCountry.target.value]
+      countries:[...input.countries, event.target.value]
     })
-  }
+    
+
+    setCountryNames([
+     ...countryNames,
+      event.target.options[event.target.selectedIndex].text
+    ])
+    }
+    
 
   const handleRadio = (event) => {
     if(event.target.value) {
@@ -120,19 +122,21 @@ console.log(idCountry);
 //Cuando el usuario apriete button Create Activity
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log(errors);
     try {
-      const hasErrors = Object.values(errors).some((error) => error !== ""); // TIENE ERRORES? TRUE o FALSE
-      console.log(hasErrors);
+      // const hasErrors = Object.values(errors).some((error) => error !== ""); // TIENE ERRORES? TRUE o FALSE
+      // console.log(hasErrors);
+      const hasErrors= false;
       if (!hasErrors) {
         await axios.post("http://localhost:3001/activities", input);
         alert("Activity created");
-        event.target.reset();
+        // event.target.reset();
       } else alert("Error in the form");
     } catch (error) {
       console.log(error);
     }
   };
-  // console.log(input);
+
  
 
 
@@ -209,16 +213,16 @@ console.log(idCountry);
         </div>     
         
         <div>
-          <label className={style.title} >Country:</label>
+          <label className={style.title} >Country ID:</label>
           <select 
-              name="idCountry" 
-              // value={input.idCountry} 
+              name="country name" 
+              // value={input.countries} 
               onChange={(event) => handleSelect (event)}
               // multiple={true}
               //lo pide React, hace que el cuadrado de búsqueda de países sea mas grande también.
           >
-            {countries.map(count => (
-              <option value={count.id} key={count.id} >{count.name}</option>
+            {countries?.map((count, index) => (
+              <option value={count.id} key={index} >{count.name}</option>
             ))}
           </select>
          
@@ -232,7 +236,7 @@ console.log(idCountry);
             >CREATE!</button>
 
       </form>
-      {input.countries.map(element =>
+      {countryNames?.map(element =>
         <div>
           <p>{element}</p>
           <button onClick={()=>handleDelete(element)}> x </button>
