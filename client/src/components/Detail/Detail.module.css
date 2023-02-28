@@ -1,0 +1,9 @@
+.detailcont {
+    text-align: center;
+    position: relative;
+}
+
+.detailcont label {
+    color: rgb(67, 67, 68);
+}
+

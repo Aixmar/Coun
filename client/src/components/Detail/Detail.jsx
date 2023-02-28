@@ -2,6 +2,7 @@ import { getCountryDetail } from '../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import style from './Detail.module.css';
 
 //uso useParams para el id.
 
@@ -19,14 +20,40 @@ const Detail = (props) => {
     const countryDetail = useSelector(state=> state.countryDetail);
   
   return (
-    <div>
+    <div className={style.detailcont}>
       <img src={countryDetail.flag} alt=""/>
-      <h1>{countryDetail.name}</h1>
+      <div>
+        <label>Name:</label>
+        <h1>{countryDetail.name}</h1>
+      </div>
+
+      <div>
+      <label>Continent:</label>
       <p>{countryDetail.continent}</p>
+      </div>
+
+      <div>{ countryDetail.capital ?
+      <label>Capital:</label> : ""
+        }
       <p>{countryDetail?.capital}</p>
+      </div>
+
+      <div>{ countryDetail.subregion ?
+      <label>Subregion:</label> : ""
+        }
       <p>{countryDetail?.subregion}</p>
-      <p>{countryDetail?.area}</p>
+      </div>
+
+      <div>{ countryDetail.area ?
+      <label>Area:</label> : ""
+        }
+      <p>{countryDetail?.area} km²</p>
+      </div>
+
+      <div>
+      <label>Population:</label>
       <p>{countryDetail.population}</p>
+      </div>
 
     </div>
   )

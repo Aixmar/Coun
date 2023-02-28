@@ -1,50 +1,37 @@
 import { useState } from "react";
-import styles from './SearchBar.module.css';
-import { getCountryName } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { filterByName } from "../../redux/actions";
+import styles from './SearchBar.module.css';
 
 
-export default function SearchBar ({onSearch}) {
+export default function SearchBar () {
    
+  const [name, setName] = useState("");
 const dispatch = useDispatch();
 
+
+
 //creamos un estado local
-const [searchInput, setSearchInput] = useState("");
 
-
- 
   //el estado se va a ir seteando cuando entrar nuevos inputs.
 
-  const handleInputChange = (event) => {
-    // event.preventDefault();
-    dispatch(setSearchInput(searchInput));
-    setSearchInput(searchInput);   
+  function handleSubmit (){
+    setName(name);   
+    dispatch(filterByName(name));
     };
 
-
-    //función del botón
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      dispatch(getCountryName(searchInput))
-    };
-    
 
   return (
-    <>
+   
       <div className={styles.container}>
       <input 
-        type="text"  
-        value={searchInput}
+        type = 'text'
+        // value={name}
         placeholder='Search country...' 
-        onChange={(event)=> handleInputChange(event.target.value)} 
+        onChange={(event)=> setName(event.target.value)} 
       />
-
-      <button 
-       type='submit'
-       onSubmit={handleSubmit}
-       >SEARCH</button> 
+      <button onClick={handleSubmit}>SEARCH</button> 
 
     </div>
-    </>
   )
 }

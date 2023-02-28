@@ -1,10 +1,14 @@
-import AllCards from "../AllCards/AllCards";
 import style from "./Home.module.css";
 import {useEffect}from 'react';
 import { useDispatch } from "react-redux";
 import {getCountries} from '../../redux/actions';
 
+
+import Countries from "../Countries/Countries";
+
 const Home = () => {
+
+  
 
   const dispatch = useDispatch();
 
@@ -16,15 +20,12 @@ const Home = () => {
   
   return (
    <>
-    <div className={style.contHome}></div>
-
-
-
-
-        <div className={style.content}>
-                  
-
-          <AllCards />
+       <div className={style.contHome}></div>
+        
+       <div className={style.content}>
+              
+        
+          <Countries />
         </div>
       
      

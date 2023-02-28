@@ -2,6 +2,7 @@ const { Activity, Country } = require("../db");
 
 const createActivity = async (idCountry, name, difficulty, duration, season) => {
   const activityCreated = await Activity.create({
+    idCountry,
     name,
     difficulty,
     duration,

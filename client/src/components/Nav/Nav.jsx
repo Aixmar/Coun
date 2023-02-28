@@ -1,12 +1,11 @@
 
 import React from "react";
-import SearchBar from "../SearchBar/SearchBar";
 import style from "./Nav.module.css";
 import { Link } from "react-router-dom";
 
 
 
-export default function Nav({onSearch}) {
+export default function Nav() {
  
 
     return ( 
@@ -16,7 +15,7 @@ export default function Nav({onSearch}) {
                 <li><Link to="/create">Create Activities</Link></li>
             <nav className={style.nav}>
         
-            <SearchBar onSearch={onSearch}/>
+            
             </nav>
             </ul>
          </>

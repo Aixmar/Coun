@@ -1,5 +1,6 @@
 import axios from "axios";
-import { GET_COUNTRIES, COUNTRY_DETAIL, GET_COUNTRY_NAME, CREATE_ACTIVITY, FILTER_BY_NAME } from "./actiontypes";
+import { FILTER_BY_NAME,  GET_COUNTRIES, COUNTRY_DETAIL, FILTER_INPUT_CONTINENT, ORDER_INPUT_COUNTRIES, ORDER_INPUT_POPULATION, GET_ACTIVITIES, FILTER_INPUT_ACTIVITY, CREATE_ACTIVITY} from "./actiontypes";
+
 
 
 //defino a mis actions creators:
@@ -31,12 +32,16 @@ export const getCountries = () => {
         }
     };
 
-    export const getCountryName = (name) => {
+// FILTRO SEARCHBAR     
+    export const filterByName = (nameCountry) => {
         return async function(dispatch) {
             try {
-                const apiData = await axios.get("http://localhost:3001/countries?name="+ name);
+                const apiData = await axios.get("http://localhost:3001/countries?name=" + nameCountry);
                 
-                dispatch({type: GET_COUNTRY_NAME, payload : apiData.data});
+                return dispatch({
+                    type: FILTER_BY_NAME,
+                    payload : apiData.data
+                })
                 
             } catch (error) {
                 console.log(error);                
@@ -44,12 +49,57 @@ export const getCountries = () => {
         }
     };
 
-    export const createActivity = (activity) => {
-        return {type: CREATE_ACTIVITY, payload: activity}
+//Ordenar por nombre country
+    export const orderInputCountries = (orderCountries) => {
+        return {type: ORDER_INPUT_COUNTRIES, payload:orderCountries}
     };
 
-    export const filterByName = () => {
-        return {type: FILTER_BY_NAME}
+ //Ordenar por population   
+    export const orderInputPopulation = (orderPopulation) => {
+        return {type: ORDER_INPUT_POPULATION, payload: orderPopulation}
     };
+
+    //Filtrar por continente
+
+    export const filterInputContinent = (filterContinent) => {
+        return {type: FILTER_INPUT_CONTINENT, payload: filterContinent}
+    };
+
+    //Filtrar por activity
+    export const filterInputActivity = (filterActivity) => {
+        return {type: FILTER_INPUT_ACTIVITY, payload: filterActivity}
+       };
+
+    //Traer todas las activities
+    export const getActivities = () => {
+        return async function(dispatch) {
+              try {
+                  const apiData = await axios.get("http://localhost:3001/activities");
+                  const allActivities = apiData.data;
+
+            dispatch({type:GET_ACTIVITIES, payload : allActivities});
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    };
+
+    export function postActivity(payload) {
+        return async function (dispatch) {
+            try {
+                const apiData = await axios.post("http://localhost:3001/activities", payload);
+                const newActivity = apiData.data;
+
+                dispatch({type:CREATE_ACTIVITY, payload : newActivity});
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    
+
+    //Le paso el payload que me va a llegar
 
     //no interactúa con la Api, de acá directamente le manda la action al reducer.

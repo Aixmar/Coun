@@ -19,7 +19,7 @@ const getActivitiesHandler = async (req, res) => {
   const createActivityHandler = async (req, res) => {
     try {
       const { idCountry, name, difficulty, duration, season } = req.body;
-      if (!name || !difficulty || !season) throw Error("Data missing");
+      if (!idCountry || !name || !difficulty || !season) throw Error("Data missing");
       else {
         const newActivity = await createActivity(
           idCountry,
@@ -28,7 +28,8 @@ const getActivitiesHandler = async (req, res) => {
           duration,
           season
         );
-        res.status(200).json("Activity created successfully");
+        res.status(200).json(idCountry);
+        // res.status(200).json("Activity created successfully");
       }
     } catch (error) {
       res.status(400).json({ error: error.message });

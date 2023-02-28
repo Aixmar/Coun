@@ -1,28 +1,50 @@
-import React from 'react'
 
-const Pagination = (props) => {
+import {  useState } from 'react'
+import style from './Pagination.module.css';
+import AllCards from '../AllCards/AllCards';
+
+const Pagination = ({countriesFiltered}) => {
   
-    const items = props.items.map((item,index)=> {
-        return <li key={item.id} > {item.title} </li>
-    })
-    //Con eso transforma el array de objetos a un array de list
+   const countriesPerPage= 10;
+   //cantidad de countries por página
 
-    return (
-        <div>
-               {/* <h1>Page: {props.currentPage}</h1> */}
+   const [currentPage, setCurrentPage ]= useState(1);
+    
+   const start = (currentPage - 1) * 10;
+   const end = start + 10;
+   
+   const paginated = countriesFiltered.slice(start,end);
 
-               <button onClick={props.prevHandler}>← ←</button>
-               <button onClick={props.nextHandler}>→ →</button>
 
-                <h2>Countries: </h2>
+   //número de página:
+   const pageNumbers = []
+   
+   for(let i=1; i<=Math.ceil(countriesFiltered.length/countriesPerPage); i++) {
+      pageNumbers.push(i)
+   }
+   //recorro cada country que me llegó ya filtrado y lo divido por 10, y lo pusheo al array.
+       
+   return (
+        <div >
+        
+             <ul className={style.pagination}>
+                {pageNumbers && 
+                pageNumbers.map(number =>(
+                    <li key={number} >
+                    <button onClick={() => setCurrentPage(number)}>{number}</button>
+                    </li>
+                ))}
 
-                <ul>
-                    {items}
-                </ul>
+             </ul>       
+
+             <AllCards countries={paginated}/>    
 
         </div>
           
-  )
+  
+ )
 }
 
-export default Pagination
+
+export default Pagination;
+

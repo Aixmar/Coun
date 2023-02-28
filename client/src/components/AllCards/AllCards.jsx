@@ -1,21 +1,21 @@
-import {useSelector} from 'react-redux'
 import Card from '../Card/Card';
 import styles from './AllCards.module.css';
 
-const AllCards = () => {
 
-    
-    const countries = useSelector((state)=> state.countries);
-    //va a buscar la propiedad countries de mi objeto del estado global (state)
 
-   return (
-
+const AllCards = (props) => {
+  //llega props countries que viene de Countries que ya esta filtrado y paginado.
+    return (
+     <>
+        
          <div className={styles.contAllCards}>
+
           {
-            countries.map((country) => {
+            props.countries?.map((country) => {
                 return (
                
                   <Card
+                    key={country.id}
                     id={country?.id}
                     name={country?.name}
                     flag={country?.flag}
@@ -27,6 +27,7 @@ const AllCards = () => {
           })
         }
          </div>
+         </>
      
   ) 
   

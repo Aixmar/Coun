@@ -18,11 +18,27 @@ const searchCountryByName = async (name) => {
   else return searchName;
 };
 
+const searchCountryById = async (idCountry) => {
+  const country = await Country.findOne({
+    where: {
+      id: idCountry.toUpperCase(),
+    },
+    include: [
+      {
+        model: Activity,
+        attributes: ["name", "difficulty", "duration", "season"],
+        through: { attributes: [] },
+      },
+    ],
+  });
+  if (!country) return ("Country not found");
+  else return country;
+};
 
 
    
 module.exports = {
     allCountries,
     searchCountryByName,
-    
+    searchCountryById,    
 }

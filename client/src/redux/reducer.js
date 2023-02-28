@@ -1,9 +1,27 @@
-import { GET_COUNTRIES, COUNTRY_DETAIL, GET_COUNTRY_NAME, CREATE_ACTIVITY } from "./actiontypes";
+import {FILTER_BY_NAME, GET_COUNTRIES, COUNTRY_DETAIL,  ORDER_INPUT_COUNTRIES, ORDER_INPUT_POPULATION, FILTER_INPUT_CONTINENT, FILTER_INPUT_ACTIVITY, GET_ACTIVITIES, CREATE_ACTIVITY  } from "./actiontypes";
+
 
 const InitialState = {
     countries: [],
     countryDetail:{},
-    activities:{}
+
+    //searchBar
+    countrySearch:[],
+
+    //Filtro actividades
+    activities:[],
+    activityInput: [],
+
+    //Filtros
+    filterCountries: [],
+
+    //Inputs que ingresan por el filtro
+    continentInput: "",
+    populationInput:"",
+    orderCountriesInput:"",
+   
+    //Pagination
+    paginatedCountries:[],
 }
 
 
@@ -16,32 +34,75 @@ const rootReducer = (state = InitialState, action ) => {
                 countries:action.payload,
             }
           
-
         case COUNTRY_DETAIL:
             return {
                 ...state,
                  countryDetail: action.payload,
                 }
-
-        case GET_COUNTRY_NAME:
+// SEARCHBAR-----------
+        case FILTER_BY_NAME:
             return {
                 ...state,
                 countries: action.payload,
-            }        
+            }   
 
-         case CREATE_ACTIVITY:
+// FILTRO POR CONTINENT -------
+        case FILTER_INPUT_CONTINENT:
             return {
-                ...state,
-                activities: action.payload,
-                };      
+               ...state,
+               continentInput: action.payload,
+             };    
 
+// ORDEN POR COUNTRY -------
+        case ORDER_INPUT_COUNTRIES:
+            return {
+               ...state,
+               orderCountriesInput: action.payload,
+               populationInput:"",
+             };    
 
+// ORDEN POR POPULATION -------
+        case ORDER_INPUT_POPULATION:
+            return {
+               ...state,
+               populationInput: action.payload,
+               orderCountriesInput:"",
+             };    
                     
-    
+              
+
+ // FILTER BY ACTIVIDAD -------
+
+        case FILTER_INPUT_ACTIVITY:
+            return {
+            ...state,
+            activityInput: action.payload,
+            };   
+
+
+  // OBTENER TODAS LAS ACTIVIDADES -------
+
+        case GET_ACTIVITIES:
+            return {
+            ...state,
+            activities: action.payload,
+            };       
+            
+            
+        case CREATE_ACTIVITY:
+            return {
+            ...state,
+            activities: action.payload,
+            };      
+
+            
         default:
-            return {...state};
-           
-    }
+        return {...state};               
+
+
+
+
+     }
 };
 
 export default rootReducer;
