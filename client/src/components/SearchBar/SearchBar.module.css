@@ -2,7 +2,7 @@
 
 .container{
     text-align: right;
-    margin-right: 250px;
+    margin-right: 20px;
 }
 
 .container button {
@@ -10,7 +10,7 @@
     padding: 10px;
     border-radius: 10px;
     border: none;
-    margin-left: 5px;
+    margin-left: 2px;
     font-family: 'Cinzel', serif;
     color: white;
 }
@@ -18,5 +18,8 @@
 .container input{
     padding: 10px;
     border-radius: 10px;
-    border: none;
+    border: solid 1px rgb(20, 55, 114);
+    width: 300px; /* ancho de la SearchBar */
+    height: 30px; /* altura de la SearchBar */
+    margin: 10px;
 }

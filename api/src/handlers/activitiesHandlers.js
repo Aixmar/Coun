@@ -28,7 +28,7 @@ const getActivitiesHandler = async (req, res) => {
           duration,
           season
         );
-        res.status(200).json(idCountry);
+        res.status(200).json(newActivity);
         // res.status(200).json("Activity created successfully");
       }
     } catch (error) {

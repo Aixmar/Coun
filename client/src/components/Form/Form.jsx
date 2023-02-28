@@ -4,10 +4,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getActivities, getCountries } from '../../redux/actions';
 import axios from 'axios';
 
-const Form = (props) => {
+const Form = () => {
 
 const dispatch = useDispatch();
   const countries = useSelector((state)=> state.countries);
+
+const idCountry = countries.map((count) => count.id)
+
+console.log(idCountry);
+
+  // const idCountry = countries.id;
 
 //Creo state local de actividades nuevas que entran por input
   const [input, setInput] = useState({
@@ -18,6 +24,7 @@ const dispatch = useDispatch();
     countries:[]
   });
   
+  console.log(input);
 
   useEffect(()=> {
     dispatch(getCountries());
@@ -51,7 +58,7 @@ const dispatch = useDispatch();
       [property]: value
     });
    }
-   console.log(input);
+  //  console.log(input);
   
   const handleCheck = (event) => {
     if(event.target.checked) {
@@ -62,10 +69,10 @@ const dispatch = useDispatch();
     }
   }
 
-  const handleSelect = (idCountries) => {
+  const handleSelect = (idCountry) => {
     setInput({
       ...input,
-      countries:[...input.countries, idCountries.target.value]
+      countries:[...input.countries, idCountry.target.value]
     })
   }
 
@@ -125,7 +132,7 @@ const dispatch = useDispatch();
       console.log(error);
     }
   };
-  console.log(input);
+  // console.log(input);
  
 
 
@@ -151,14 +158,14 @@ const dispatch = useDispatch();
 
   return (
     <>
-    <h1>CREATE NEW ACTIVITY</h1>
+    <h1 className={style.create}>CREATE NEW ACTIVITY</h1>
 
    
     
-      <form onSubmit={submitHandler}>
+      <form className={style.form} onSubmit={submitHandler}>
        
        <div>
-        <label>Name:</label>
+        <label className={style.title} >Name:</label>
         <input 
             type="text" 
             name="name" 
@@ -170,7 +177,8 @@ const dispatch = useDispatch();
         </div>
 
         <div>
-        Difficulty:
+          <label className={style.title}> Difficulty:</label>
+        
         <label> <input type="radio" name= "1" value="1" onChange={handleRadio}/> 1 </label>
         <label> <input type="radio" name= "2" value="2" onChange={handleRadio}/> 2 </label>
         <label> <input type="radio" name= "3" value="3" onChange={handleRadio}/> 3 </label>
@@ -180,7 +188,7 @@ const dispatch = useDispatch();
          </div>
 
         <div>
-        <label>Duration:</label>
+        <label className={style.title} >Duration:</label>
         <input 
             type="number" 
             name="duration" 
@@ -192,7 +200,7 @@ const dispatch = useDispatch();
         </div>
 
         <div>
-          <label>Season:</label>
+          <label className={style.title} >Season:</label>
           <label> <input type="checkbox" name="winter" value="winter" onChange={(event) =>handleCheck(event)} /> Winter</label>
           <label> <input type="checkbox" name="spring" value="spring" onChange={(event) =>handleCheck(event)} /> Spring</label>
           <label> <input type="checkbox" name="summer"  value="summer" onChange={(event) =>handleCheck(event)} /> Summer</label>
@@ -201,10 +209,10 @@ const dispatch = useDispatch();
         </div>     
         
         <div>
-          <label>Countries:</label>
+          <label className={style.title} >Country:</label>
           <select 
-              name="idCountries" 
-              // value={input.countries} 
+              name="idCountry" 
+              // value={input.idCountry} 
               onChange={(event) => handleSelect (event)}
               // multiple={true}
               //lo pide React, hace que el cuadrado de búsqueda de países sea mas grande también.

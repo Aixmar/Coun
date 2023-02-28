@@ -2,6 +2,7 @@ import Filters from '../Filter/Filters'
 import Pagination from '../Pagination/Pagination'
 import { useSelector} from 'react-redux'
 import SearchBar from "../SearchBar/SearchBar";
+import styles from './Countries.module.css';
 
 const Countries = () => {
 
@@ -49,9 +50,11 @@ const Countries = () => {
        countriesFiltered.sort((a, b) =>b.population - a.population)}
  
  return (
-    <div>
+    <div className={styles.container}>
       <SearchBar />
-      <Filters />
+      <div className={styles.filters}> <Filters /> </div>
+      
+
       <Pagination
              countriesFiltered={countriesFiltered}          
              />

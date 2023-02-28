@@ -25,7 +25,7 @@ const Pagination = ({countriesFiltered}) => {
    //recorro cada country que me llegó ya filtrado y lo divido por 10, y lo pusheo al array.
        
    return (
-        <div >
+        <div>
         
              <ul className={style.pagination}>
                 {pageNumbers && 

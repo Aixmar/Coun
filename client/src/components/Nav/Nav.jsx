@@ -10,16 +10,24 @@ export default function Nav() {
 
     return ( 
         <>
-            <ul>
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/create">Create Activities</Link></li>
             <nav className={style.nav}>
         
+            <ul className={style.contenedor}>
+            <Link className={style.link} to="/home">HOME | HENRY COUNTRIES</Link>
+
+            <Link className={style.link2} to="/create">Create Activities</Link>
+            
+               </ul>
             
             </nav>
-            </ul>
          </>
     );
 }
 
 
+{/* <ul className={style.contenedor}>
+<li> <Link className={style.link} to="/home">HOME | HENRY COUNTRIES</Link></li>
+
+<li> <Link className={style.link2} to="/create">Create Activities</Link></li>
+
+   </ul> */}
